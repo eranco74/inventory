@@ -1,7 +1,10 @@
 apiVersion: eranco74.redhat/v1alpha1
 kind: MachineHealth
 metadata:
-  name: example-machinehealth
+  name: rack01-server22-machinehealth
 spec:
   # Add fields here
-  size: 3
+  Interval: 3
+  Ip: "192.168.1.5"
+  Port: "8080"
+  MachineHelath: "Unknown"
