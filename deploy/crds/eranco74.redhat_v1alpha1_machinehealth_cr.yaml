@@ -4,7 +4,7 @@ metadata:
   name: rack01-server22-machinehealth
 spec:
   # Add fields here
-  Interval: 3
-  Ip: "192.168.1.5"
-  Port: "8080"
-  MachineHelath: "Unknown"
+  interval: 3
+  ip: "192.168.1.5"
+  port: "8080"
+  machinehealth: "Unknown"
