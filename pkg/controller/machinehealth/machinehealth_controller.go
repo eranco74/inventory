@@ -147,9 +147,9 @@ func newPodForCR(cr *eranco74v1alpha1.MachineHealth) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				{
-					Name:    "busybox",
-					Image:   "busybox",
-					Command: []string{"echo", cr.Spec.Ip, ">", "/foo"},
+					Name:    "eran-foo",
+					Image:   "health_checker",
+					Command: []string{"--ip", cr.Spec.Ip, "--port", cr.Spec.Port},
 				},
 			},
 		},
