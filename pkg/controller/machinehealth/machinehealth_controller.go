@@ -149,7 +149,8 @@ func newPodForCR(cr *eranco74v1alpha1.MachineHealth) *corev1.Pod {
 				{
 					Name:    "eran-foo",
 					Image:   "health_checker",
-					Command: []string{"--ip", cr.Spec.Ip, "--port", cr.Spec.Port},
+					ImagePullPolicy: "Never",
+					Args: []string{"--ip", cr.Spec.Ip, "--port", cr.Spec.Port},
 				},
 			},
 		},
