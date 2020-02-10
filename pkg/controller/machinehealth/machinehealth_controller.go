@@ -2,7 +2,7 @@ package machinehealth
 
 import (
 	"context"
-
+	"fmt"
 	eranco74v1alpha1 "github.com/eranco74/inventory/pkg/apis/eranco74/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -134,6 +134,10 @@ func newPodForCR(cr *eranco74v1alpha1.MachineHealth) *corev1.Pod {
 	labels := map[string]string{
 		"app": cr.Name,
 	}
+	reqLogger := log.WithValues("Request.Namespace", "Eran")
+
+	reqLogger.Info(fmt.Sprintf("XXXX %v ", cr.Spec.Ip))
+
 	return &corev1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      cr.Name + "-pod",
@@ -145,7 +149,7 @@ func newPodForCR(cr *eranco74v1alpha1.MachineHealth) *corev1.Pod {
 				{
 					Name:    "busybox",
 					Image:   "busybox",
-					Command: []string{"sleep", "3600"},
+					Command: []string{"echo", cr.Spec.Ip, ">", "/foo"},
 				},
 			},
 		},

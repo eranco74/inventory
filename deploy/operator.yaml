@@ -16,10 +16,10 @@ spec:
       containers:
         - name: inventory
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: inventory
           command:
           - inventory
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           env:
             - name: WATCH_NAMESPACE
               valueFrom:

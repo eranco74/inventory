@@ -10,8 +10,12 @@ import (
 // MachineHealthSpec defines the desired state of MachineHealth
 type MachineHealthSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
+	// Important: Run "operator-sdk generate crds" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	Ip            string `json:"ip"`
+	Port          string `json:"port"`
+	Interval      int    `json:"interval"`
+	MachineHelath string `json:"machinehealth"`
 }
 
 // MachineHealthStatus defines the observed state of MachineHealth
