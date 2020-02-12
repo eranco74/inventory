@@ -1,0 +1,22 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority: /root/.kube/ca.crt
+    server: https://192.168.39.107:8443
+  name: minikube
+contexts:
+- context:
+    cluster: minikube
+    user: minikube
+  name: minikube
+current-context: minikube
+kind: Config
+preferences: {}
+users:
+- name: kube:admin/api-crc-testing:6443
+  user:
+    token: 5GH3tCkMfUiNaodj3PHwQk0c2LlYo4I6gKj9wsHazf8
+- name: minikube
+  user:
+    client-certificate: /root/.kube/client.crt
+    client-key: /root/.kube/client.key
