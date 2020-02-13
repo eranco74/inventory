@@ -86,6 +86,8 @@ func (r *ReconcileMachineHealth) Reconcile(request reconcile.Request) (reconcile
 	reqLogger := log.WithValues("Request.Namespace", request.Namespace, "Request.Name", request.Name)
 	reqLogger.Info("Reconciling MachineHealth")
 
+	reqLogger.Info("NamespaceName: ", request.NamespacedName)
+
 	// Fetch the MachineHealth instance
 	instance := &eranco74v1alpha1.MachineHealth{}
 	err := r.client.Get(context.TODO(), request.NamespacedName, instance)
@@ -119,6 +121,8 @@ func (r *ReconcileMachineHealth) Reconcile(request reconcile.Request) (reconcile
 		}
 
 		// Pod created successfully - don't requeue
+		instance.Spec.MachineHelath="Provisioning"
+		r.client.Update(context.TODO(), instance)
 		return reconcile.Result{}, nil
 	} else if err != nil {
 		return reconcile.Result{}, err
@@ -147,10 +151,10 @@ func newPodForCR(cr *eranco74v1alpha1.MachineHealth) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				{
-					Name:    "eran-foo",
+					Name:    "healthchecker",
 					Image:   "health_checker",
 					ImagePullPolicy: "Never",
-					Args: []string{"--ip", cr.Spec.Ip, "--port", cr.Spec.Port},
+					Args: []string{"--ip", cr.Spec.Ip, "--port", cr.Spec.Port, "--namespace", cr.Namespace, "--name", cr.Name},
 				},
 			},
 		},
